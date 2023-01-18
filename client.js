@@ -1,4 +1,5 @@
 const net = require("net");
+const { stdin } = require("process");
 
 // establishes a connection with the game server
 const connect = function() {
@@ -15,14 +16,13 @@ const connect = function() {
     console.log("Server says: ", data);
   });
 
-  // conn.on("connect", () => {
-  //   conn.write(`Move: up`);
+  // const handleUserInput = function (key) {
+  //   if (key === '\u0003'){
+  //     process.exit();
+  //   }
+  // }
 
-  //   setInterval(() => {
-  //     conn.write('Move: left');
-  //   }, 5000);
-
-  // });
+  stdin.on("data", handleUserInput);
 
   return conn;
 };
@@ -30,4 +30,4 @@ const connect = function() {
 console.log("Connecting ...");
 connect();
 
-module.exports = connect;
+module.exports = { connect };
